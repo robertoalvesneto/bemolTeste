@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'package:bemol_canal/screens/home_screen.dart';
+import 'package:bemol_canal/screens/init/init_screen.dart';
+
 void main() {
-  runApp(MaterialApp(
-    title: "Bemol Canal",
-    home: Home(),
-  ));
-}
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Bemol Canal"),
-      ),
-      body: Container(),
-    );
-  }
+  runApp(
+    MaterialApp(
+      title: "Bemol Canal",
+      home: InitScreen(),
+      initialRoute: "/",
+      routes: {
+        "/home": (context) => HomeScreen(),
+        "/init": (context) => InitScreen(),
+      },
+    ),
+  );
 }
