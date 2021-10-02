@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:bemol_canal/constants/colors.dart';
+
 class SignUpScreen extends StatefulWidget {
   final VoidCallback onComeBackButtonPressed;
 
@@ -20,7 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.purple,
+        color: ConstColors.liteBlue,
         child: Center(
           child: Column(
             children: [

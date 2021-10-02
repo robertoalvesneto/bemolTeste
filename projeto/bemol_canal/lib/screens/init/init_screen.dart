@@ -1,6 +1,9 @@
+import 'package:bemol_canal/constants/font_size.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bemol_canal/constants/screen_size.dart';
+import 'package:bemol_canal/constants/colors.dart';
+
 import 'package:bemol_canal/screens/init/signin_screen.dart';
 import 'package:bemol_canal/screens/init/signup_screen.dart';
 
@@ -12,13 +15,14 @@ class InitScreen extends StatefulWidget {
 }
 
 class _InitScreenState extends State<InitScreen> {
-  final PageController _pageController = PageController();
+  final PageController _pageController = PageController(initialPage: 1);
   bool _slider = true;
   Size? _pageViewSize;
 
   @override
   Widget build(BuildContext context) {
     return PageView(
+      physics: NeverScrollableScrollPhysics(),
       scrollDirection: _slider ? Axis.vertical : Axis.horizontal,
       controller: _pageController,
       children: [
@@ -29,22 +33,28 @@ class _InitScreenState extends State<InitScreen> {
             height: Screen.sizeHeight(context: context),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    changeScrollDirection(false);
-                    goBackInitScreen(index: 0);
-                  },
-                  child: const Text("pag 1"),
+                Container(
+                  child: Column(
+                    children: [
+                      Logo(),
+                      Message(),
+                    ],
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    changeScrollDirection(true);
-                    goBackInitScreen(index: 2);
-                  },
-                  child: const Text("pag 2"),
-                )
+                Container(
+                  decoration: BoxDecoration(
+                    color: ConstColors.liteBlue,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(150),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                  width: Screen.sizeWidth(context: context),
+                  height: Screen.sizeHeight(context: context, dividedBy: 2.5),
+                  child: Buttons(),
+                ),
               ],
             ),
           ),
@@ -54,11 +64,94 @@ class _InitScreenState extends State<InitScreen> {
     );
   }
 
+  Widget Logo() {
+    return Container(
+      margin: EdgeInsets.only(top: 30),
+      width: Screen.sizeWidth(
+          context: context,
+          multipliedBy: (Screen.ratio(context) < 9 / 16) ? 0.6 : 0.5),
+      child: Image.asset("assets/images/logo_bemol.png"),
+    );
+  }
+
+  Widget Message() {
+    return RichText(
+      text: TextSpan(
+        text: "Bem vindo ao ",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: FontSize.headline,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+            text: "Bemol",
+            style: TextStyle(
+              color: ConstColors.red,
+            ),
+          ),
+          TextSpan(
+            text: " Canal",
+            style: TextStyle(
+              color: ConstColors.blue,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget Buttons() {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          InitButton(
+            text: "Logar",
+            slider: false,
+            index: 0,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          InitButton(
+            text: "Cadastrar",
+            slider: true,
+            index: 2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget InitButton({
+    required String text,
+    required bool slider,
+    required int index,
+  }) {
+    return Container(
+      width: Screen.sizeWidth(context: context, dividedBy: 3 / 2),
+      decoration: BoxDecoration(
+        color: ConstColors.white,
+        border: Border.all(color: ConstColors.red, width: 1.5),
+        borderRadius: const BorderRadius.all(
+          const Radius.circular(15.0),
+        ),
+      ),
+      child: TextButton(
+        onPressed: () {
+          changeScrollDirection(slider);
+          goBackInitScreen(index: index);
+        },
+        child: Text(text),
+      ),
+    );
+  }
+
   Future<void> goBackInitScreen({int? index}) {
     return _pageController.animateToPage(
       (index == null) ? 1 : index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInCirc,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.linearToEaseOut,
     );
   }
 
