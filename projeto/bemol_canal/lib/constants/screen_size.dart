@@ -15,7 +15,7 @@ class Screen {
     assert(context != null || screenHeight != 0);
 
     double height =
-        (context != null) ? size(context).width : screenHeight;
+        (context != null) ? size(context).height : screenHeight;
 
     return ((height - subtract) * multipliedBy) / dividedBy;
   }
