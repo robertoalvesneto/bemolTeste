@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bemol_canal/constants/colors.dart';
+import 'package:bemol_canal/screens/init/widgets/forms/personal_data.dart';
 
 class SignUpScreen extends StatefulWidget {
   final VoidCallback onComeBackButtonPressed;
@@ -21,20 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: ConstColors.liteBlue,
-        child: Center(
-          child: Column(
-            children: [
-              Text("Cadastrar"),
-              ElevatedButton(
-                onPressed: () => onComeBackButtonPressed(),
-                child: const Text("Voltar"),
-              )
-            ],
-          ),
-        ),
-      ),
+      body: PersonalDataForm(onComeBackButtonPressed: onComeBackButtonPressed),
     );
   }
 }

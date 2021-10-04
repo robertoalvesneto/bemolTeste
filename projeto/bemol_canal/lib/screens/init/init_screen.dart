@@ -28,6 +28,7 @@ class _InitScreenState extends State<InitScreen> {
       children: [
         SignInScreen(onComeBackButtonPressed: goBackInitScreen),
         Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Container(
             width: Screen.sizeWidth(context: context),
             height: Screen.sizeHeight(context: context),
