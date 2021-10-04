@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
-  final VoidCallback onComeBackButtonPressed;
+  final ValueChanged<int> onComeBackButtonPressed;
 
   const SignInScreen({Key? key, required this.onComeBackButtonPressed})
       : super(key: key);
 
   @override
   _SignInScreenState createState() =>
-      _SignInScreenState(onComeBackButtonPressed);
+      _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final VoidCallback onComeBackButtonPressed;
-
-  _SignInScreenState(this.onComeBackButtonPressed);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +24,7 @@ class _SignInScreenState extends State<SignInScreen> {
             children: [
               Text("Logar"),
               ElevatedButton(
-                onPressed: () => onComeBackButtonPressed(),
+                onPressed: () => widget.onComeBackButtonPressed(1),
                 child: const Text("Voltar"),
               )
             ],

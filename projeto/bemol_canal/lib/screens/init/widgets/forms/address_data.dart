@@ -55,7 +55,7 @@ class _AdressDataFormState extends State<AdressDataForm> {
                         );
                       }
                       */
-                          widget.onButtonPressed(0);
+                          widget.onButtonPressed(2);
                         },
                         child: const Text('Continuar'),
                       ),

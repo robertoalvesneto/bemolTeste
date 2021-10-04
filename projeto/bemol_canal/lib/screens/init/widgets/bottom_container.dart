@@ -4,13 +4,6 @@ import 'package:bemol_canal/constants/screen_size.dart';
 import 'package:bemol_canal/constants/colors.dart';
 
 class BottomContainer extends StatelessWidget {
-  final String titleName;
-  final VoidCallback callback;
-
-  BottomContainer({
-    required this.titleName,
-    required this.callback,
-  });
 
   @override
   Widget build(BuildContext context) {

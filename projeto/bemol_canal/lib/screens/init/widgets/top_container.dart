@@ -6,11 +6,13 @@ import 'package:bemol_canal/constants/colors.dart';
 
 class TopContainer extends StatelessWidget {
   final String titleName;
-  final VoidCallback callback;
+  final ValueChanged<int> callback;
+  final int? index;
 
   TopContainer({
     required this.titleName,
     required this.callback,
+    this.index,
   });
 
   @override
@@ -49,7 +51,7 @@ class TopContainer extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () => callback(),
+              onPressed: () => callback(index ?? 0),
               child: Icon(
                 Icons.arrow_upward,
                 color: ConstColors.white,

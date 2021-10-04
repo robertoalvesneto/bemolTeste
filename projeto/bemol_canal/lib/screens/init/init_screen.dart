@@ -141,16 +141,16 @@ class _InitScreenState extends State<InitScreen> {
       child: TextButton(
         onPressed: () {
           changeScrollDirection(slider);
-          goBackInitScreen(index: index);
+          goBackInitScreen(index);
         },
         child: Text(text),
       ),
     );
   }
 
-  Future<void> goBackInitScreen({int? index}) {
+  Future<void> goBackInitScreen(int index) {
     return _pageController.animateToPage(
-      (index == null) ? 1 : index,
+      index,
       duration: const Duration(milliseconds: 400),
       curve: Curves.linearToEaseOut,
     );
