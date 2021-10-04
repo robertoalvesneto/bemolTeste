@@ -27,6 +27,14 @@ void main() {
             ),
           ),
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: TextButton.styleFrom(
+            textStyle: TextStyle(
+              fontFamily: 'Roboto-Medium',
+              fontSize: FontSize.button,
+            ),
+          ),
+        ),
       ),
     ),
   );
