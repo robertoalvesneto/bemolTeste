@@ -90,15 +90,16 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
                             );
 
                             // Preenchendo dados
-                            widget.registerUser.name = _nameController.text;
-                            widget.registerUser.birth = _birthController.text;
-                            widget.registerUser.gender = _genderStr;
-                            widget.registerUser.cpf = _cpfController.text;
-                            widget.registerUser.rg = _rgController.text;
-                            widget.registerUser.number = _numberController.text;
-
+                            widget.registerUser.addPersonalData(
+                                name: _nameController.text,
+                                birth: _birthController.text,
+                                gender: _genderStr,
+                                cpf: _cpfController.text,
+                                rg: _rgController.text,
+                                number: _numberController.text);
                             // Passando dados
-                            widget.callbackPassRegisterUser(widget.registerUser);
+                            widget
+                                .callbackPassRegisterUser(widget.registerUser);
 
                             // Trocando de tela
                             widget.onContinueButtonPressed(1);
@@ -223,7 +224,7 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
           return 'Preencha o campo';
         } else if (!cpfIsValid(cpf: value)) {
           return 'CPF invalido';
-        } 
+        }
         return null;
       },
       labelText: "CPF",
