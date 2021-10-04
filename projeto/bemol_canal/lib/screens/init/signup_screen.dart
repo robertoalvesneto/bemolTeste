@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+
+import 'package:bemol_canal/models/aux_register_user.dart';
+
 import 'package:bemol_canal/screens/init/widgets/forms/personal_data.dart';
 import 'package:bemol_canal/screens/init/widgets/forms/address_data.dart';
 import 'package:bemol_canal/screens/init/widgets/forms/count_data.dart';
@@ -16,6 +19,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final PageController _pageController = PageController();
+  RegisterUser registerUser = RegisterUser();
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           PersonalDataForm(
             onComeBackButtonPressed: widget.onComeBackButtonPressed,
             onContinueButtonPressed: navigateFormsScreens,
+            callbackPassRegisterUser: callbackPassRegisterUser,
+            registerUser: this.registerUser,
+            
           ),
           AdressDataForm(
             onButtonPressed: navigateFormsScreens,
@@ -41,11 +48,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<void> navigateFormsScreens(int index) {
-    print(index);
     return _pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 400),
       curve: Curves.linearToEaseOut,
     );
+  }
+
+  void callbackPassRegisterUser(RegisterUser registerUser) {
+    this.registerUser = registerUser;
+    print(this.registerUser.birth);
   }
 }

@@ -39,33 +39,31 @@ class _CountDataFormState extends State<CountDataForm> {
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 40),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      _email(),
-                      _password(),
-                      _confirmPassword(),
-                      ElevatedButton(
-                        onPressed: () {
-                          /*
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    _email(),
+                    _password(),
+                    _confirmPassword(),
+                    ElevatedButton(
+                      onPressed: () {
+                        /*
                       if (_formKey.currentState!.validate()) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
                       }
                       */
-                        },
-                        child: const Text('Continuar'),
-                      ),
-                    ],
-                  ),
+                      },
+                      child: const Text('Continuar'),
+                    ),
+                  ],
                 ),
               ),
             ),
-            BottomContainer(),
+            SizedBox(height: 1,),
           ],
         ),
       ),

@@ -1,8 +1,8 @@
-import 'package:bemol_canal/constants/font_size.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bemol_canal/constants/screen_size.dart';
 import 'package:bemol_canal/constants/colors.dart';
+import 'package:bemol_canal/constants/font_size.dart';
 
 import 'package:bemol_canal/screens/init/signin_screen.dart';
 import 'package:bemol_canal/screens/init/signup_screen.dart';

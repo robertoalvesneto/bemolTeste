@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:bemol_canal/constants/colors.dart';
+import 'package:flutter/services.dart';
 
 Widget CustomTextFormField({
   required Function validator,
+  // TODO: DEVOLVER REQUIRED
+  TextEditingController? controller,
   required labelText,
   required hintText,
+  List<TextInputFormatter>? inputFormatters,
+  TextInputType? textInputType,
   double? width,
   IconData? icon,
   String? prefixText,
@@ -14,7 +19,10 @@ Widget CustomTextFormField({
     width: width ?? null,
     padding: EdgeInsets.symmetric(vertical: 20),
     child: TextFormField(
+      keyboardType: textInputType,
       validator: (value) => validator(value),
+      controller: controller,
+      inputFormatters: inputFormatters,
       decoration: textFieldStyle(
         icon: icon,
         prefixText: prefixText,
