@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 Widget CustomTextFormField({
   required Function validator,
+  Function? onChanged,
   // TODO: DEVOLVER REQUIRED
   TextEditingController? controller,
   required labelText,
@@ -21,6 +22,7 @@ Widget CustomTextFormField({
     child: TextFormField(
       keyboardType: textInputType,
       validator: (value) => validator(value),
+      onChanged: (value) => onChanged!(value),
       controller: controller,
       inputFormatters: inputFormatters,
       decoration: textFieldStyle(

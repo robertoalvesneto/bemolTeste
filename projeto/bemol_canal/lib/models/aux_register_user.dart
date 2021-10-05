@@ -9,12 +9,12 @@ class RegisterUser {
   String? rg;
   String? number;
   String? cep;
-  String? estado;
-  String? bairro;
-  String? rua;
-  String? casa;
-  String? complemento;
-  String? referencia;
+  String? state;
+  String? district;
+  String? street;
+  String? home;
+  String? complement;
+  String? reference;
 
   RegisterUser({
     this.name,
@@ -24,12 +24,12 @@ class RegisterUser {
     this.rg,
     this.number,
     this.cep,
-    this.estado,
-    this.bairro,
-    this.rua,
-    this.casa,
-    this.complemento,
-    this.referencia,
+    this.state,
+    this.district,
+    this.street,
+    this.home,
+    this.complement,
+    this.reference,
   });
 
   void addPersonalData({
@@ -50,19 +50,19 @@ class RegisterUser {
 
   void addAddress({
     required String cep,
-    required String estado,
-    required String bairro,
-    required String rua,
-    required String casa,
-    required String complemento,
-    required String referencia,
+    required String state,
+    required String district,
+    required String street,
+    required String home,
+    required String complement,
+    required String reference,
   }) {
     this.cep = cep;
-    this.estado = estado;
-    this.bairro = bairro;
-    this.rua = rua;
-    this.casa = casa;
-    this.complemento = complemento;
-    this.referencia = referencia;
+    this.state = state;
+    this.district = district;
+    this.street = street;
+    this.home = home;
+    this.complement = complement;
+    this.reference = reference;
   }
 }

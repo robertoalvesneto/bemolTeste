@@ -70,12 +70,12 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: _birthData(context),
+                            child: _birthData(),
                           ),
                           SizedBox(width: 10),
                           Container(
                             width: 150,
-                            child: _gender(context),
+                            child: _gender(),
                           ),
                         ],
                       ),
@@ -84,6 +84,8 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
                       _number(),
                       ElevatedButton(
                         onPressed: () {
+                          //TODO: TIRAR ISSO. APENAS PARA TESTE
+                          widget.onContinueButtonPressed(1);
                           if (_formKey.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Processing Data')),
@@ -143,7 +145,7 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
     );
   }
 
-  Widget _birthData(BuildContext context) {
+  Widget _birthData() {
     final _birthMask = ConcretMask().birthInputFormatter();
     return CustomTextFormField(
         validator: (String value) {
@@ -170,7 +172,7 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
         icon: Icons.cake);
   }
 
-  Widget _gender(BuildContext context) {
+  Widget _gender() {
     return DropdownButtonFormField(
       value: _genderStr,
       validator: (value) {
