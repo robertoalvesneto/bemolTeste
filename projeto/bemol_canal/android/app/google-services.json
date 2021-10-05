@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "252106952438",
+    "project_id": "bemolcanal",
+    "storage_bucket": "bemolcanal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252106952438:android:937979f1df762344ada6d7",
+        "android_client_info": {
+          "package_name": "com.example.bemol_canal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252106952438-nh4qkqafmua1eqv0iko795shiis62qr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIE-_tUVN4rANmA0gX5OxePy9SEmsGmJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252106952438-nh4qkqafmua1eqv0iko795shiis62qr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
