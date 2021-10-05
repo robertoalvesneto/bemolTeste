@@ -39,4 +39,14 @@ class ConcretMask extends Mask {
 
     return maskFormatter;
   }
+
+  @override
+  MaskTextInputFormatter cepInputFormater() {
+    var maskFormatter = new MaskTextInputFormatter(
+      mask: '#####-###',
+      filter: {"#": RegExp(r'[0-9]')},
+    );
+
+    return maskFormatter;
+  }
 }
