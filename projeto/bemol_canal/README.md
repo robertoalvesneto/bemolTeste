@@ -1,16 +1,27 @@
 # bemol_canal
 
-A new Flutter project.
+Aplicativo para unificar a comunicação e suporte ao cliente.
 
-## Getting Started
+Foi desenvolvido e testado para:
+* **Android**
 
-This project is a starting point for a Flutter application.
+## Requisitos:
+* `minSdkVersion 16`
+* `androidx`
+* `Flutter version 2.5.2`
+* `Dart version 2.14.3`
 
-A few resources to get you started if this is your first Flutter project:
+## Configurar projeto:
+(visando linha de comando no linux)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clonar repositorio: `git clone https://github.com/robertoalvesneto/bemolTeste.git`
+2. Navegar até o projeto: `cd projeto/bemol_canal/`
+3. Pegar dependencias: `flutter packages get`
+4. Preparar um dispositivo, segue as opções de fazer isso:
+    1. conectar um dispositivo ao USB com permissão de depuração;
+    2. conectar via `adb`;
+    3. emular um android com o **Android Studio**
+6. Rodar o projeto:
+    1. rodar como debugger: `flutter run`
+    2. build de produção: `flutter build apk` e depois instale `flutter install`
+7. Ser feliz :tada:
