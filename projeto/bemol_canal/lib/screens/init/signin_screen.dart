@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bemol_canal/helpers/auth.dart';
 
 import 'package:bemol_canal/screens/init/widgets/forms/custom_textformfield.dart';
 
@@ -52,7 +52,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 width: Screen.sizeWidth(context: context),
                 height: Screen.sizeHeight(context: context, dividedBy: 2.5),
-                child: _login(),
+                child: _login(context),
               ),
             ],
           ),
@@ -62,32 +62,33 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   // --- FUNCTIONS
-  void _handlerLoginButton() {
+  void _handlerLoginButton(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       final email = _emailController.text;
       final password = _passwordController.text;
 
       // Logar usuario
-      _loginUser(email, password);
+      _loginUser(context, email, password);
     }
   }
 
-  void _loginUser(String email, String password) {
-    final _authFire = FirebaseAuth.instance;
+  void _loginUser(BuildContext context, String email, String password) async {
+    final _auth = FirebaseAuthh.singleton();
+    bool isConnected = await _auth.signIn(email, password);
 
-    _authFire
-        .signInWithEmailAndPassword(email: email, password: password)
-        .then((user) {
+    if (isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Sucesso ao logar!'),
       ));
 
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-    }).catchError((onError) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacementNamed('/home');
+      });
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Houve um erro, por favor, tente novamente.'),
       ));
-    });
+    }
   }
 
   // --- WIDGETS
@@ -134,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _login() {
+  Widget _login(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: Form(
@@ -147,7 +148,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _loginButton(),
+                _loginButton(context),
                 _goBackButton(),
               ],
             ),
@@ -203,9 +204,9 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _loginButton() {
+  Widget _loginButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => _handlerLoginButton(),
+      onPressed: () => _handlerLoginButton(context),
       child: const Text('Continuar'),
     );
   }

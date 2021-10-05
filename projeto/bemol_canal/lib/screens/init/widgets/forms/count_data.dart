@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:bemol_canal/helpers/auth.dart';
 
 import 'package:bemol_canal/models/aux_register_user.dart';
 
@@ -58,7 +60,7 @@ class _CountDataFormState extends State<CountDataForm> {
                     _password(),
                     _confirmPassword(),
                     ElevatedButton(
-                      onPressed: () => _handlerSubmitButton(),
+                      onPressed: () => _handlerSubmitButton(context),
                       child: const Text('Continuar'),
                     ),
                   ],
@@ -76,7 +78,7 @@ class _CountDataFormState extends State<CountDataForm> {
 
   // --- FUNCTIONS
 
-  void _handlerSubmitButton() {
+  void _handlerSubmitButton(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       // Preenchendo dados
       widget.registerUser.addAccount(
@@ -88,30 +90,32 @@ class _CountDataFormState extends State<CountDataForm> {
       widget.callbackPassRegisterUser(widget.registerUser);
 
       // Cadastrar usuario
-      _registerNewUser(widget.registerUser);
+      _registerNewUser(context, widget.registerUser);
     }
   }
 
-  void _registerNewUser(RegisterUser user) {
-    final _authFire = FirebaseAuth.instance;
+  void _registerNewUser(BuildContext context, RegisterUser user) async {
+    final _auth = FirebaseAuthh.singleton();
 
     // Para chegar aqui esses dados ja foram preenchidos e tratados,
     // entao nao ah risco de ser nulo.
-    final email = user.email ?? '';
-    final password = user.password ?? '';
-    _authFire
-        .createUserWithEmailAndPassword(email: email, password: password)
-        .then((user) {
+    bool isConnected = await _auth.signUp(user.email!, user.password!);
+
+    if (isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Sucesso ao cadastrar!'),
       ));
 
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-    }).catchError((onError) {
+
+
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacementNamed('/home');
+      });
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Houve um erro, por favor, tente novamente.'),
       ));
-    });
+    }
   }
 
   // --- WIDGETS

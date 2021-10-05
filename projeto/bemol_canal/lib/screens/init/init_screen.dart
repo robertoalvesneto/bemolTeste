@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bemol_canal/helpers/auth.dart';
 
 import 'package:bemol_canal/constants/screen_size.dart';
 import 'package:bemol_canal/constants/colors.dart';
@@ -21,15 +21,10 @@ class _InitScreenState extends State<InitScreen> {
   bool _slider = true;
   Size? _pageViewSize;
 
-
-  @override
-  void initState() {
-    _userIsConnected();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    _userIsConnected(context);
+
     return PageView(
       physics: NeverScrollableScrollPhysics(),
       scrollDirection: _slider ? Axis.vertical : Axis.horizontal,
@@ -75,11 +70,13 @@ class _InitScreenState extends State<InitScreen> {
   }
 
   // --- FUNCTIONS
-  void _userIsConnected() async {
-    final _authFire = FirebaseAuth.instance;
+  void _userIsConnected(BuildContext context) async {
+    final auth = FirebaseAuthh.singleton();
 
-    if (_authFire.currentUser != null)
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+    if (auth.checkSignIn())
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacementNamed('/home');
+      });
   }
 
   Future<void> _goBackInitScreen(int index) {
