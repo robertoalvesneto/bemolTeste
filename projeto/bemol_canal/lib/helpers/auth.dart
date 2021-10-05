@@ -15,14 +15,10 @@ abstract class Auth {
 class FirebaseAuthh extends Auth {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  //Guarda sua instância.
   static FirebaseAuthh? _instance = null;
 
-  //Método construtor privado.
   FirebaseAuthh._privateConstructor();
 
-  //Singleton: se a variável ainda não foi inicializada, inicializa.
-  //Retorna a instância única.
   static FirebaseAuthh singleton() {
     if (_instance == null) _instance = FirebaseAuthh._privateConstructor();
 

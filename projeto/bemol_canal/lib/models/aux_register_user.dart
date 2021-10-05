@@ -77,4 +77,27 @@ class RegisterUser {
     this.email = email;
     this.password = password;
   }
+
+  Map<String, dynamic> toMap() {
+    Map<String, dynamic> map = {
+      "name": this.name!,
+      "birth": this.birth!,
+      "gender": this.gender!,
+      "cpf": this.cpf!,
+      "rg": this.rg!,
+      "number": this.number!,
+      "email": this.email!,
+      "adress": {
+        "cep": this.cep!,
+        "state": this.state!,
+        "district": this.district!,
+        "street": this.street!,
+        "home": this.home!,
+        "complement": this.complement!,
+        "reference": this.reference!,
+      }
+    };
+
+    return map;
+  }
 }

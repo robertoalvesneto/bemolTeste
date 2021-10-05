@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:bemol_canal/helpers/database.dart';
 import 'package:bemol_canal/helpers/auth.dart';
 
 import 'package:bemol_canal/models/aux_register_user.dart';
@@ -106,7 +105,9 @@ class _CountDataFormState extends State<CountDataForm> {
         content: Text('Sucesso ao cadastrar!'),
       ));
 
-
+      // SALVAR DADOS DO USUARIO
+      final _db = FireDataBase.singleton();
+      _db.insertUserValues(uid: _auth.getUIDAuth(), user: user.toMap());
 
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacementNamed('/home');
