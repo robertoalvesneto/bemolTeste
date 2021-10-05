@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 
@@ -11,36 +12,41 @@ import 'package:bemol_canal/screens/init/init_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-    MaterialApp(
-      title: "Bemol Canal",
-      home: InitScreen(),
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/",
-      routes: {
-        "/home": (context) => HomeScreen(),
-        "/init": (context) => InitScreen(),
-      },
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            textStyle: TextStyle(
-              fontFamily: 'Roboto-Medium',
-              fontSize: FontSize.button,
-              color: ConstColors.blue,
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).whenComplete(() {
+    runApp(
+      MaterialApp(
+        title: "Bemol Canal",
+        home: InitScreen(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: "/",
+        routes: {
+          "/home": (context) => HomeScreen(),
+          "/init": (context) => InitScreen(),
+        },
+        theme: ThemeData(
+          fontFamily: 'Roboto',
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              textStyle: TextStyle(
+                fontFamily: 'Roboto-Medium',
+                fontSize: FontSize.button,
+                color: ConstColors.blue,
+              ),
             ),
           ),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: TextButton.styleFrom(
-            textStyle: TextStyle(
-              fontFamily: 'Roboto-Medium',
-              fontSize: FontSize.button,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: TextButton.styleFrom(
+              textStyle: TextStyle(
+                fontFamily: 'Roboto-Medium',
+                fontSize: FontSize.button,
+              ),
             ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  });
 }
