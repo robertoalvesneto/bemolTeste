@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:bemol_canal/constants/screen_size.dart';
 import 'package:bemol_canal/constants/colors.dart';
 import 'package:bemol_canal/constants/font_size.dart';
@@ -18,6 +20,13 @@ class _InitScreenState extends State<InitScreen> {
   final PageController _pageController = PageController(initialPage: 1);
   bool _slider = true;
   Size? _pageViewSize;
+
+
+  @override
+  void initState() {
+    _userIsConnected();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +75,12 @@ class _InitScreenState extends State<InitScreen> {
   }
 
   // --- FUNCTIONS
+  void _userIsConnected() async {
+    final _authFire = FirebaseAuth.instance;
+
+    if (_authFire.currentUser != null)
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+  }
 
   Future<void> _goBackInitScreen(int index) {
     return _pageController.animateToPage(
