@@ -40,7 +40,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             registerUser: this.registerUser,
           ),
           CountDataForm(
-            onButtonPressed: navigateFormsScreens,
+            onNavigatorButtonPressed: navigateFormsScreens,
+            callbackPassRegisterUser: callbackPassRegisterUser,
+            registerUser: this.registerUser,
           ),
         ],
       ),

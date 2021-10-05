@@ -15,6 +15,8 @@ class RegisterUser {
   String? home;
   String? complement;
   String? reference;
+  String? email;
+  String? password;
 
   RegisterUser({
     this.name,
@@ -30,6 +32,8 @@ class RegisterUser {
     this.home,
     this.complement,
     this.reference,
+    this.email,
+    this.password,
   });
 
   void addPersonalData({
@@ -64,5 +68,13 @@ class RegisterUser {
     this.home = home;
     this.complement = complement;
     this.reference = reference;
+  }
+
+  void addAccount({
+    required String email,
+    required String password,
+  }) {
+    this.email = email;
+    this.password = password;
   }
 }

@@ -7,11 +7,11 @@ import 'package:bemol_canal/models/aux_register_user.dart';
 import 'package:bemol_canal/helpers/mask_inputs.dart';
 import 'package:bemol_canal/helpers/validate_cep.dart';
 
-import 'package:bemol_canal/constants/screen_size.dart';
-
 import 'package:bemol_canal/screens/init/widgets/top_container.dart';
 import 'package:bemol_canal/screens/init/widgets/bottom_container.dart';
 import 'package:bemol_canal/screens/init/widgets/forms/custom_textformfield.dart';
+
+import 'package:bemol_canal/constants/screen_size.dart';
 
 class AdressDataForm extends StatefulWidget {
   final ValueChanged<int> onNavigatorButtonPressed;
@@ -124,7 +124,7 @@ class _AdressDataFormState extends State<AdressDataForm> {
         complement: _complementController.text,
         reference: _referenceController.text,
       );
-      
+
       // Passando dados
       widget.callbackPassRegisterUser(widget.registerUser);
 
