@@ -1,0 +1,18 @@
+QUESTÕES:
+
+1. A solução deve ser disponibilizada em Cloud ou On-premise?
+On-premise é custoso e trabalhoso, requer a manutenção tanto do software quanto do hardware usado para manter o serviço. Contudo, parte do custo barato da Cloud se dá por não ter a posse real do seu sistema, estando ‘preso’ a empresa prestadora do serviço.
+Nesse caso, vejo a Cloud como uma boa escolha, pois os dados de suporte não são relevantes a longo prazo e as informações do cliente e suas solicitações podem ser requeridas da Bemol.
+Também deve-se analisar a demanda esperada para o consumo dessa aplicação, e se o porte atual do dataframe da empresa já consegue manter, ou se talvez seria necessária um pouco de escalabilidade. Sendo algum desses dois casos, pode sair mais barato o On-premise.
+ 
+2. Considerando a participação de 4 pessoas técnicas para o desenvolvimento dessa solução, responda qual ferramenta acreditas ser apropriada para o controle de tarefas da equipe, a ferramenta é ágil? 
+Meu estudo de organização de equipes e projetos resume-se a disciplina de engenharia de software, onde vimos alguns modelos ágeis mas o foco foi na documentação e organização clássica, e os livros ‘SCRUM’ e ‘SPRINT’, logo, a minha visão fica enviesada por falta outras perspectivas.
+Contudo, acho uma boa escolha a estratégia de sprints onde o trabalho maior é dividido em pequenas entregas, o que torna o feedback e os testes constantes, e a divisão das atividades em 'histórias' que possuem seus próprios pesos de dificuldade, criando uma boa ideia de tempo.
+Claro, além dos quatro princípios do manifesto ágil. 
+3. Você se sente capaz de liderar esta equipe? Por quê? 
+Não. Sou novo e possuo pouca experiência, liderança deve estar a cargo de um pleno ou senior, com anos de experiência de mercado.
+4. Se pudesse sugerir uma melhoria, mudança ou oportunidade. O que seria? 
+Não penso em nada.
+5. Acha válido esse desafio para o processo que está participando?
+Sim.
+
