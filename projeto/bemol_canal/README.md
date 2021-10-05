@@ -25,3 +25,8 @@ Foi desenvolvido e testado para:
     1. rodar como debugger: `flutter run`
     2. build de produção: `flutter build apk` e depois instale `flutter install`
 7. Ser feliz :tada:
+
+## Conta do Firebase:
+Caminho do projeto: (https://console.firebase.google.com/u/0/project/bemolcanal/overview)
+
+Favor entrar em contato via o meu [email](robertoalvesneto9@gmail.com) para eu liberar acesso ao seu email.
