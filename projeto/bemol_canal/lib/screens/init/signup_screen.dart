@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:bemol_canal/models/aux_register_user.dart';
 
 import 'package:bemol_canal/screens/init/widgets/forms/personal_data.dart';
@@ -34,7 +33,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             onContinueButtonPressed: navigateFormsScreens,
             callbackPassRegisterUser: callbackPassRegisterUser,
             registerUser: this.registerUser,
-            
           ),
           AdressDataForm(
             onButtonPressed: navigateFormsScreens,
@@ -47,7 +45,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  // --- FUNCTIONS
+
   Future<void> navigateFormsScreens(int index) {
+    // Gerencia a navegacao entre as telas.
     return _pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 400),
@@ -56,6 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void callbackPassRegisterUser(RegisterUser registerUser) {
+    // Permite que as telas passagem os dados do usuario de volta.
     this.registerUser = registerUser;
     print(this.registerUser.birth);
   }

@@ -26,7 +26,7 @@ class _InitScreenState extends State<InitScreen> {
       scrollDirection: _slider ? Axis.vertical : Axis.horizontal,
       controller: _pageController,
       children: [
-        SignInScreen(onComeBackButtonPressed: goBackInitScreen),
+        SignInScreen(onComeBackButtonPressed: _goBackInitScreen),
         Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
@@ -39,8 +39,8 @@ class _InitScreenState extends State<InitScreen> {
                 Container(
                   child: Column(
                     children: [
-                      Logo(),
-                      Message(),
+                      _logo(),
+                      _message(),
                     ],
                   ),
                 ),
@@ -54,18 +54,40 @@ class _InitScreenState extends State<InitScreen> {
                   ),
                   width: Screen.sizeWidth(context: context),
                   height: Screen.sizeHeight(context: context, dividedBy: 2.5),
-                  child: Buttons(),
+                  child: _buttons(),
                 ),
               ],
             ),
           ),
         ),
-        SignUpScreen(onComeBackButtonPressed: goBackInitScreen)
+        SignUpScreen(onComeBackButtonPressed: _goBackInitScreen)
       ],
     );
   }
 
-  Widget Logo() {
+  // --- FUNCTIONS
+
+  Future<void> _goBackInitScreen(int index) {
+    return _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.linearToEaseOut,
+    );
+  }
+
+  void _changeScrollDirection(bool slider) {
+    setState(() {
+      _pageViewSize = Screen.size(context);
+      _slider = slider;
+
+      _pageController.position.applyViewportDimension(
+          _slider ? _pageViewSize!.height : _pageViewSize!.width);
+    });
+  }
+
+  // --- WIDGETS
+
+  Widget _logo() {
     return Container(
       margin: EdgeInsets.only(top: 30),
       width: Screen.sizeWidth(
@@ -75,7 +97,7 @@ class _InitScreenState extends State<InitScreen> {
     );
   }
 
-  Widget Message() {
+  Widget _message() {
     return RichText(
       text: TextSpan(
         text: "Bem vindo ao ",
@@ -101,12 +123,12 @@ class _InitScreenState extends State<InitScreen> {
     );
   }
 
-  Widget Buttons() {
+  Widget _buttons() {
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          InitButton(
+          _initButton(
             text: "Logar",
             slider: false,
             index: 0,
@@ -114,7 +136,7 @@ class _InitScreenState extends State<InitScreen> {
           SizedBox(
             height: 20,
           ),
-          InitButton(
+          _initButton(
             text: "Cadastrar",
             slider: true,
             index: 2,
@@ -124,7 +146,7 @@ class _InitScreenState extends State<InitScreen> {
     );
   }
 
-  Widget InitButton({
+  Widget _initButton({
     required String text,
     required bool slider,
     required int index,
@@ -140,29 +162,11 @@ class _InitScreenState extends State<InitScreen> {
       ),
       child: TextButton(
         onPressed: () {
-          changeScrollDirection(slider);
-          goBackInitScreen(index);
+          _changeScrollDirection(slider);
+          _goBackInitScreen(index);
         },
         child: Text(text),
       ),
     );
-  }
-
-  Future<void> goBackInitScreen(int index) {
-    return _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.linearToEaseOut,
-    );
-  }
-
-  void changeScrollDirection(bool slider) {
-    setState(() {
-      _pageViewSize = Screen.size(context);
-      _slider = slider;
-
-      _pageController.position.applyViewportDimension(
-          _slider ? _pageViewSize!.height : _pageViewSize!.width);
-    });
   }
 }

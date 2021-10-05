@@ -90,10 +90,7 @@ class _AdressDataFormState extends State<AdressDataForm> {
                     _complement(),
                     _reference(),
                     ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate())
-                          widget.onButtonPressed(2);
-                      },
+                      onPressed: () => _handlerSubmitButton(),
                       child: const Text('Continuar'),
                     ),
                   ],
@@ -107,41 +104,44 @@ class _AdressDataFormState extends State<AdressDataForm> {
     );
   }
 
-  Future<void> setValuesInTextFormFields(String value) async {
-    try {
-      String _cep = value;
-      if (_cep.length >= 9) {
-        _cep = _cep.replaceAll('-', '');
+  // --- FUNCTIONS
+
+  void _handlerSubmitButton() {
+    if (_formKey.currentState!.validate()) widget.onButtonPressed(2);
+  }
+
+  Future<void> _validateCep(String value) async {
+    String _cep = value;
+    if (_cep.length >= 9) {
+      _cep = _cep.replaceAll('-', '');
+      try {
         await validateCep(cep: _cep).timeout(Duration(seconds: 5)).then(
             (Map? map) {
-          _stateController.text = map?['localidade'] ?? '';
-          _districtController.text = map?['bairro'] ?? '';
-          _complementController.text = map?['complemento'] ?? '';
-          _streetController.text = map?['logradouro'] ?? '';
+          _setValuesInTextFormFields(map);
 
-          setState(() {
-            cepIsValid = (map?['erro'] == true) ? false : true;
-          });
+          setState(() => cepIsValid = (map?['erro'] == true) ? false : true);
         }, onError: (value) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Falha ao recuperar dados com o CEP')),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Falha ao recuperar dados com o CEP')));
 
-          setState(() {
-            cepIsValid = false;
-          });
+          setState(() => cepIsValid = false);
         });
+      } on TimeoutException catch (_) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Falha ao recuperar dados com o CEP')));
+        setState(() => cepIsValid = false);
       }
-    } on TimeoutException catch (_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Falha ao recuperar dados com o CEP')),
-      );
-      setState(() {
-        cepIsValid = false;
-      });
     }
   }
 
+  void _setValuesInTextFormFields(Map? map) {
+    _stateController.text = map?['localidade'] ?? '';
+    _districtController.text = map?['bairro'] ?? '';
+    _complementController.text = map?['complemento'] ?? '';
+    _streetController.text = map?['logradouro'] ?? '';
+  }
+
+  // --- WIDGETS
   Widget _cep() {
     final _cepMask = ConcretMask().cepInputFormater();
     return CustomTextFormField(
@@ -157,7 +157,7 @@ class _AdressDataFormState extends State<AdressDataForm> {
         return null;
       },
       onChanged: (value) {
-        setValuesInTextFormFields(value);
+        _validateCep(value);
       },
       textInputType: TextInputType.number,
       controller: _cepController,

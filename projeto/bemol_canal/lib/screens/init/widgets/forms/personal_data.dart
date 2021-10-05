@@ -83,30 +83,7 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
                       _rg(),
                       _number(),
                       ElevatedButton(
-                        onPressed: () {
-                          //TODO: TIRAR ISSO. APENAS PARA TESTE
-                          widget.onContinueButtonPressed(1);
-                          if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
-
-                            // Preenchendo dados
-                            widget.registerUser.addPersonalData(
-                                name: _nameController.text,
-                                birth: _birthController.text,
-                                gender: _genderStr,
-                                cpf: _cpfController.text,
-                                rg: _rgController.text,
-                                number: _numberController.text);
-                            // Passando dados
-                            widget
-                                .callbackPassRegisterUser(widget.registerUser);
-
-                            // Trocando de tela
-                            widget.onContinueButtonPressed(1);
-                          }
-                        },
+                        onPressed: () => handlerSubmitButton(),
                         child: const Text('Continuar'),
                       ),
                     ],
@@ -120,6 +97,28 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
       ),
     );
   }
+
+  // --- FUNCTIONS
+  void handlerSubmitButton() {
+    if (_formKey.currentState!.validate()) {
+      // Preenchendo dados
+      widget.registerUser.addPersonalData(
+        name: _nameController.text,
+        birth: _birthController.text,
+        gender: _genderStr,
+        cpf: _cpfController.text,
+        rg: _rgController.text,
+        number: _numberController.text,
+      );
+      // Passando dados
+      widget.callbackPassRegisterUser(widget.registerUser);
+
+      // Trocando de tela
+      widget.onContinueButtonPressed(1);
+    }
+  }
+
+  // --- WIDGETS
 
   Widget _name() {
     return CustomTextFormField(
