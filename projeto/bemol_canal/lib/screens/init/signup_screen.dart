@@ -35,7 +35,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             registerUser: this.registerUser,
           ),
           AdressDataForm(
-            onButtonPressed: navigateFormsScreens,
+            onNavigatorButtonPressed: navigateFormsScreens,
+            callbackPassRegisterUser: callbackPassRegisterUser,
+            registerUser: this.registerUser,
           ),
           CountDataForm(
             onButtonPressed: navigateFormsScreens,
@@ -59,6 +61,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void callbackPassRegisterUser(RegisterUser registerUser) {
     // Permite que as telas passagem os dados do usuario de volta.
     this.registerUser = registerUser;
-    print(this.registerUser.birth);
   }
 }

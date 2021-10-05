@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'package:bemol_canal/models/aux_register_user.dart';
+
 import 'package:bemol_canal/helpers/mask_inputs.dart';
 import 'package:bemol_canal/helpers/validate_cep.dart';
 
@@ -12,11 +14,15 @@ import 'package:bemol_canal/screens/init/widgets/bottom_container.dart';
 import 'package:bemol_canal/screens/init/widgets/forms/custom_textformfield.dart';
 
 class AdressDataForm extends StatefulWidget {
-  final ValueChanged<int> onButtonPressed;
+  final ValueChanged<int> onNavigatorButtonPressed;
+  final ValueChanged<RegisterUser> callbackPassRegisterUser;
+  final RegisterUser registerUser;
 
   const AdressDataForm({
     Key? key,
-    required this.onButtonPressed,
+    required this.onNavigatorButtonPressed,
+    required this.callbackPassRegisterUser,
+    required this.registerUser,
   }) : super(key: key);
 
   @override
@@ -48,7 +54,7 @@ class _AdressDataFormState extends State<AdressDataForm> {
           children: [
             TopContainer(
               titleName: "Endereço",
-              callback: widget.onButtonPressed,
+              callback: widget.onNavigatorButtonPressed,
               index: 0,
             ),
             Container(
@@ -107,7 +113,24 @@ class _AdressDataFormState extends State<AdressDataForm> {
   // --- FUNCTIONS
 
   void _handlerSubmitButton() {
-    if (_formKey.currentState!.validate()) widget.onButtonPressed(2);
+    if (_formKey.currentState!.validate()) {
+      // Preenchendo dados
+      widget.registerUser.addAddress(
+        cep: _cepController.text,
+        state: _stateController.text,
+        district: _districtController.text,
+        street: _streetController.text,
+        home: _homeController.text,
+        complement: _complementController.text,
+        reference: _referenceController.text,
+      );
+      
+      // Passando dados
+      widget.callbackPassRegisterUser(widget.registerUser);
+
+      // Trocando de tela
+      widget.onNavigatorButtonPressed(2);
+    }
   }
 
   Future<void> _validateCep(String value) async {
