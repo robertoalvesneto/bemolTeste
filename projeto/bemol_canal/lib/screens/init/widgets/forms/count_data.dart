@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:bemol_canal/models/aux_register_user.dart';
 
 import 'package:bemol_canal/screens/init/widgets/top_container.dart';
@@ -85,9 +87,31 @@ class _CountDataFormState extends State<CountDataForm> {
       // Passando dados
       widget.callbackPassRegisterUser(widget.registerUser);
 
-      // Trocando de tela
-      //widget.onNavigatorButtonPressed(2);
+      // Cadastrar usuario
+      _registerNewUser(widget.registerUser);
     }
+  }
+
+  void _registerNewUser(RegisterUser user) {
+    final _authFire = FirebaseAuth.instance;
+
+    // Para chegar aqui esses dados ja foram preenchidos e tratados,
+    // entao nao ah risco de ser nulo.
+    final email = user.email ?? '';
+    final password = user.password ?? '';
+    _authFire
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((user) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Sucesso ao cadastrar!'),
+      ));
+
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+    }).catchError((onError) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Houve um erro, por favor, tente novamente.'),
+      ));
+    });
   }
 
   // --- WIDGETS
@@ -116,7 +140,7 @@ class _CountDataFormState extends State<CountDataForm> {
       validator: (String value) {
         if (value.isEmpty) {
           return 'O campo não pode ser vazio';
-        } else if (value.length <= 5) {
+        } else if (value.length <= 7) {
           return 'Muito fraca';
         }
         return null;
@@ -134,7 +158,7 @@ class _CountDataFormState extends State<CountDataForm> {
       validator: (String value) {
         if (value.isEmpty) {
           return 'O campo não pode ser vazio';
-        } else if (value.length <= 5) {
+        } else if (value.length <= 7) {
           return 'Muito fraca';
         } else if (_passwordController.text != '' &&
             value != _passwordController.text) {
